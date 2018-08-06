@@ -1,0 +1,11 @@
+[Protocol]
+exec=moken-qt '%u'
+protocol=moken
+input=none
+output=none
+helper=true
+listing=
+reading=false
+writing=false
+makedir=false
+deleting=false

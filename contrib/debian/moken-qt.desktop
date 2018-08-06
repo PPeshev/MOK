@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=MOKEN
+Comment=MOKEN P2P Cryptocurrency
+Comment[fr]=MOKEN, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=MOKEN, eşten eşe kriptografik sanal para birimi
+Exec=moken-qt %u
+Terminal=false
+Type=Application
+Icon=moken128
+MimeType=x-scheme-handler/moken;
+Categories=Office;Finance;

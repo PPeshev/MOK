@@ -1,0 +1,26 @@
+[Unit]
+Description=MOKEN's distributed currency daemon
+After=network.target
+
+[Service]
+User=moken
+Group=moken
+
+Type=forking
+PIDFile=/var/lib/mokend/mokend.pid
+
+ExecStart=/usr/bin/mokend -daemon -pid=/var/lib/mokend/mokend.pid \
+          -conf=/etc/moken/moken.conf -datadir=/var/lib/mokend
+
+ExecStop=-/usr/bin/moken-cli -conf=/etc/moken/moken.conf \
+         -datadir=/var/lib/mokend stop
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,26 @@
+# /etc/conf.d/mokend: config file for /etc/init.d/mokend
+
+# Config file location
+#BITCOIND_CONFIGFILE="/etc/moken/moken.conf"
+
+# What directory to write pidfile to?  (created and owned by $BITCOIND_USER)
+#BITCOIND_PIDDIR="/var/run/mokend"
+
+# What filename to give the pidfile
+#BITCOIND_PIDFILE="${BITCOIND_PIDDIR}/mokend.pid"
+
+# Where to write mokend data (be mindful that the blockchain is large)
+#BITCOIND_DATADIR="/var/lib/mokend"
+
+# User and group to own mokend process
+#BITCOIND_USER="moken"
+#BITCOIND_GROUP="moken"
+
+# Path to mokend executable
+#BITCOIND_BIN="/usr/bin/mokend"
+
+# Nice value to run mokend under
+#BITCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+BITCOIND_OPTS=""
