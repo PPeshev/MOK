@@ -145,7 +145,7 @@ public:
         /** Height or Time Based Activations **/
         nLastPOWBlock = 1000;
         nZerocoinStartHeight = 1300;
-        nZerocoinStartTime = 1533724260; // October 17, 2017 4:30:00 AM
+        nZerocoinStartTime = 1533727860; // October 17, 2017 4:30:00 AM
         nBlockRecalculateAccumulators = 1300; //Trigger a recalculation of accumulators
         nBlockLastGoodCheckpoint = 1300; //Last valid accumulator checkpoint
         
@@ -224,10 +224,10 @@ public:
         assert(genesis.hashMerkleRoot == uint256("9552431dbc538d5ec9f8e2dce8c1a05a8caa43515282f0d3e8e45d80beff1c07"));
 
 
-        vSeeds.push_back(CDNSSeedData("45.76.119.58", "45.76.119.58"));
-        vSeeds.push_back(CDNSSeedData("216.158.237.109", "216.158.237.109"));
-        vSeeds.push_back(CDNSSeedData("207.148.87.167", "207.148.87.167"));
-        vSeeds.push_back(CDNSSeedData("207.148.87.76", "207.148.87.76"));
+        vSeeds.push_back(CDNSSeedData("95.179.146.37", "95.179.146.37"));
+        vSeeds.push_back(CDNSSeedData("144.202.13.27", "144.202.13.27"));
+        vSeeds.push_back(CDNSSeedData("45.77.180.62", "45.77.180.62"));
+        vSeeds.push_back(CDNSSeedData("149.28.165.199", "149.28.165.199"));
  
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 50);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 21);
