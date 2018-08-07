@@ -145,7 +145,7 @@ public:
         /** Height or Time Based Activations **/
         nLastPOWBlock = 1000;
         nZerocoinStartHeight = 1300;
-        nZerocoinStartTime = 1534972881; // October 17, 2017 4:30:00 AM
+        nZerocoinStartTime = 1533724260; // October 17, 2017 4:30:00 AM
         nBlockRecalculateAccumulators = 1300; //Trigger a recalculation of accumulators
         nBlockLastGoodCheckpoint = 1300; //Last valid accumulator checkpoint
         
