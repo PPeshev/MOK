@@ -307,7 +307,6 @@ public:
         nMaxMoneyOut = 43199500 * COIN;
         nZerocoinStartHeight = 201576;
         nZerocoinStartTime = 1501776000;
-        nBlockRecalculateAccumulators = 9908000; //Trigger a recalculation of accumulators
         
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
         genesis.nTime = 1454124731;
