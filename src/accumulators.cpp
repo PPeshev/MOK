@@ -185,7 +185,7 @@ bool InitializeAccumulators(const int nHeight, int& nHeightCheckpoint, Accumulat
 {
     if (nHeight < Params().Zerocoin_StartHeight())
         return error("%s: height is below zerocoin activated", __func__);
-
+    LogPrintf("here 555 2-3\n");
     //On a specific block, a recalculation of the accumulators will be forced
     if (nHeight == Params().Zerocoin_Block_RecalculateAccumulators()) {
         mapAccumulators.Reset();
@@ -199,7 +199,7 @@ bool InitializeAccumulators(const int nHeight, int& nHeightCheckpoint, Accumulat
         nHeightCheckpoint = Params().Zerocoin_Block_LastGoodCheckpoint();
         return true;
     }
-
+    LogPrintf("here 555 2-4\n");
     if (nHeight >= Params().Zerocoin_StartHeight()) {
         //after v2_start, accumulators need to use v2 params
         mapAccumulators.Reset(Params().Zerocoin_Params(false));
@@ -216,7 +216,7 @@ bool InitializeAccumulators(const int nHeight, int& nHeightCheckpoint, Accumulat
             return true;
         }
     }
-
+    LogPrintf("here 555 2-5\n");
     //Use the previous block's checkpoint to initialize the accumulator's state
     uint256 nCheckpointPrev = chainActive[nHeight - 1]->nAccumulatorCheckpoint;
     if (nCheckpointPrev == 0)
@@ -245,6 +245,7 @@ LogPrintf("here 555 2\n");
     //set the accumulators to last checkpoint value
     int nHeightCheckpoint;
     mapAccumulators.Reset();
+    LogPrintf("here 555 2-2\n");
     if (!InitializeAccumulators(nHeight, nHeightCheckpoint, mapAccumulators))
         return error("%s: failed to initialize accumulators", __func__);
 LogPrintf("here 555 3\n");
