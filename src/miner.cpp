@@ -450,14 +450,14 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
             pblocktemplate->vTxFees[0] = -nFees;
 	    	pblock->vtx[0].vin[0].scriptSig = CScript() << nHeight << OP_0;
         }
-
+        LogPrintf("Compute final coinbase transaction\n");
         // Fill in header
         pblock->hashPrevBlock = pindexPrev->GetBlockHash();
         if (!fProofOfStake)
             UpdateTime(pblock, pindexPrev);
         pblock->nBits = GetNextWorkRequired(pindexPrev, pblock);
         pblock->nNonce = 0;
-
+LogPrintf("Fill in header\n");
 		if (fProofOfStake){
         //Calculate the accumulator checkpoint only if the previous cached checkpoint need to be updated
         uint256 nCheckpoint;
@@ -482,6 +482,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
 
         pblock->nAccumulatorCheckpoint = pCheckpointCache.second.second;
 		}
+		LogPrintf("nAccumulatorCheckpoint\n");
         pblocktemplate->vTxSigOps[0] = GetLegacySigOpCount(pblock->vtx[0]);
 
         CValidationState state;
