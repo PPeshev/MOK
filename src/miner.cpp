@@ -462,20 +462,29 @@ LogPrintf("Fill in header\n");
         //Calculate the accumulator checkpoint only if the previous cached checkpoint need to be updated
         uint256 nCheckpoint;
         uint256 hashBlockLastAccumulated = chainActive[nHeight - (nHeight % 10) - 10]->GetBlockHash();
+LogPrintf("here 1\n");
         if (nHeight >= pCheckpointCache.first || pCheckpointCache.second.first != hashBlockLastAccumulated) {
+LogPrintf("here 2\n");
             //For the period before v2 activation, zMOK will be disabled and previous block's checkpoint is all that will be needed
             pCheckpointCache.second.second = pindexPrev->nAccumulatorCheckpoint;
+LogPrintf("here 3\n");
             if (pindexPrev->nHeight + 1 >= Params().Zerocoin_StartHeight()) {
+LogPrintf("here 4\n");
                 AccumulatorMap mapAccumulators(Params().Zerocoin_Params(false));
+LogPrintf("here 5\n");
                 if (fZerocoinActive && !CalculateAccumulatorCheckpoint(nHeight, nCheckpoint, mapAccumulators)) {
+                 LogPrintf("here 6\n");
                     LogPrintf("%s: failed to get accumulator checkpoint\n", __func__);
                 } else {
+                LogPrintf("here 7\n");
                     // the next time the accumulator checkpoint should be recalculated ( the next height that is multiple of 10)
                     pCheckpointCache.first = nHeight + (10 - (nHeight % 10));
-
+LogPrintf("here 8\n");
                     // the block hash of the last block used in the accumulator checkpoint calc. This will handle reorg situations.
                     pCheckpointCache.second.first = hashBlockLastAccumulated;
+LogPrintf("here 9\n");
                     pCheckpointCache.second.second = nCheckpoint;
+                    LogPrintf("here 10\n");
                 }
             }
         }
