@@ -241,21 +241,22 @@ LogPrintf("here 555\n");
         nCheckpoint = chainActive[nHeight - 1]->nAccumulatorCheckpoint;
         return true;
     }
-
+LogPrintf("here 555 2\n");
     //set the accumulators to last checkpoint value
     int nHeightCheckpoint;
     mapAccumulators.Reset();
     if (!InitializeAccumulators(nHeight, nHeightCheckpoint, mapAccumulators))
         return error("%s: failed to initialize accumulators", __func__);
-
+LogPrintf("here 555 3\n");
     //Whether this should filter out invalid/fraudulent outpoints
     bool fFilterInvalid = nHeight >= Params().Zerocoin_Block_RecalculateAccumulators();
-
+LogPrintf("here 555 4\n");
     //Accumulate all coins over the last ten blocks that havent been accumulated (height - 20 through height - 11)
     int nTotalMintsFound = 0;
     CBlockIndex *pindex = chainActive[nHeightCheckpoint - 20];
-
+LogPrintf("here 555 5\n");
     while (pindex->nHeight < nHeight - 10) {
+        LogPrintf("here 555 666\n");
         // checking whether we should stop this process due to a shutdown request
         if (ShutdownRequested())
             return false;
@@ -265,16 +266,16 @@ LogPrintf("here 555\n");
             pindex = chainActive[pindex->nHeight + 1];
             continue;
         }
-
+LogPrintf("here 555 7\n");
         //grab mints from this block
         CBlock block;
         if(!ReadBlockFromDisk(block, pindex))
             return error("%s: failed to read block from disk", __func__);
-
+LogPrintf("here 555 8\n");
         std::list<PublicCoin> listPubcoins;
         if (!BlockToPubcoinList(block, listPubcoins, fFilterInvalid))
             return error("%s: failed to get zerocoin mintlist from block %d", __func__, pindex->nHeight);
-
+LogPrintf("here 555 9\n");
         nTotalMintsFound += listPubcoins.size();
         LogPrintf("zero", "%s found %d mints\n", __func__, listPubcoins.size());
 
