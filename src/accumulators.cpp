@@ -276,7 +276,7 @@ LogPrintf("here 555\n");
             return error("%s: failed to get zerocoin mintlist from block %d", __func__, pindex->nHeight);
 
         nTotalMintsFound += listPubcoins.size();
-        LogPrint("zero", "%s found %d mints\n", __func__, listPubcoins.size());
+        LogPrintf("zero", "%s found %d mints\n", __func__, listPubcoins.size());
 
         //add the pubcoins to accumulator
         for (const PublicCoin pubcoin : listPubcoins) {
@@ -292,7 +292,7 @@ LogPrintf("here 555\n");
     else
         nCheckpoint = mapAccumulators.GetCheckpoint();
 
-    LogPrint("zero", "%s checkpoint=%s\n", __func__, nCheckpoint.GetHex());
+    LogPrintf("zero", "%s checkpoint=%s\n", __func__, nCheckpoint.GetHex());
     return true;
 }
 
