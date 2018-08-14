@@ -143,9 +143,9 @@ public:
         nMaxMoneyOut = 21000000 * COIN;
 
         /** Height or Time Based Activations **/
-        nLastPOWBlock = 100;
+        nLastPOWBlock = 70;
         nZerocoinStartHeight = 200;
-        nZerocoinStartTime = 1534274659;
+        nZerocoinStartTime = 1534282557;
         nBlockLastGoodCheckpoint = 200; //Last valid accumulator checkpoint
         
         /**
