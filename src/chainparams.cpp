@@ -138,16 +138,16 @@ public:
         nMinerThreads = 0;
         nTargetTimespan = 1 * 60; // MOKEN: 1 day
         nTargetSpacing = 1 * 60;  // MOKEN: 1 minute
-        nMaturity = 100;
+        nMaturity = 1;//change back to 100
         nMasternodeCountDrift = 20;
         nMaxMoneyOut = 21000000 * COIN;
 
         /** Height or Time Based Activations **/
-        nLastPOWBlock = 1000;
-        nZerocoinStartHeight = 1300;
+        nLastPOWBlock = 100;
+        nZerocoinStartHeight = 101;
         nZerocoinStartTime = 1534235141;
-        nBlockRecalculateAccumulators = 1300; //Trigger a recalculation of accumulators
-        nBlockLastGoodCheckpoint = 1300; //Last valid accumulator checkpoint
+        nBlockRecalculateAccumulators = 0; //Trigger a recalculation of accumulators
+        nBlockLastGoodCheckpoint = 0; //Last valid accumulator checkpoint
         
         /**
          * Build the genesis block. Note that the output of the genesis coinbase cannot
@@ -267,7 +267,7 @@ public:
         nRequiredAccumulation = 1;
         nDefaultSecurityLevel = 100; //full security level for accumulators
         nZerocoinHeaderVersion = 4; //Block headers must be this version once zerocoin is active
-        nZerocoinRequiredStakeDepth = 200; //The required confirmations for a zmok to be stakable
+        nZerocoinRequiredStakeDepth = 10; //The required confirmations for a zmok to be stakable
 
         nBudget_Fee_Confirmations = 6; // Number of confirmations for the finalization fee
     }
