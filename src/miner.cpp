@@ -472,6 +472,7 @@ LogPrintf("here 3\n");
 LogPrintf("here 4\n");
                 AccumulatorMap mapAccumulators(Params().Zerocoin_Params(false));
 LogPrintf("here 5\n");
+LogPrintf("nHeight %u\n", nHeight);
                 if (fZerocoinActive && !CalculateAccumulatorCheckpoint(nHeight, nCheckpoint, mapAccumulators)) {
                  LogPrintf("here 6\n");
                     LogPrintf("%s: failed to get accumulator checkpoint\n", __func__);
