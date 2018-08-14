@@ -143,10 +143,10 @@ public:
         nMaxMoneyOut = 21000000 * COIN;
 
         /** Height or Time Based Activations **/
-        nLastPOWBlock = 100;
-        nZerocoinStartHeight = 101;
+        nLastPOWBlock = 200;
+        nZerocoinStartHeight = 300;
         nZerocoinStartTime = 1534235141;
-        nBlockLastGoodCheckpoint = 101; //Last valid accumulator checkpoint
+        nBlockLastGoodCheckpoint = 300; //Last valid accumulator checkpoint
         
         /**
          * Build the genesis block. Note that the output of the genesis coinbase cannot
