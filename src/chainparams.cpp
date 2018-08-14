@@ -146,7 +146,6 @@ public:
         nLastPOWBlock = 100;
         nZerocoinStartHeight = 101;
         nZerocoinStartTime = 1534235141;
-        nBlockRecalculateAccumulators = 0; //Trigger a recalculation of accumulators
         nBlockLastGoodCheckpoint = 101; //Last valid accumulator checkpoint
         
         /**
@@ -309,7 +308,6 @@ public:
         nZerocoinStartHeight = 201576;
         nZerocoinStartTime = 1501776000;
         nBlockRecalculateAccumulators = 9908000; //Trigger a recalculation of accumulators
-        nBlockLastGoodCheckpoint = 9891730; //Last valid accumulator checkpoint
         
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
         genesis.nTime = 1454124731;
