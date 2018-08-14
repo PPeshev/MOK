@@ -147,7 +147,7 @@ public:
         nZerocoinStartHeight = 101;
         nZerocoinStartTime = 1534235141;
         nBlockRecalculateAccumulators = 0; //Trigger a recalculation of accumulators
-        nBlockLastGoodCheckpoint = 0; //Last valid accumulator checkpoint
+        nBlockLastGoodCheckpoint = 101; //Last valid accumulator checkpoint
         
         /**
          * Build the genesis block. Note that the output of the genesis coinbase cannot

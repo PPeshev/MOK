@@ -186,38 +186,6 @@ bool InitializeAccumulators(const int nHeight, int& nHeightCheckpoint, Accumulat
     if (nHeight < Params().Zerocoin_StartHeight())
         return error("%s: height is below zerocoin activated", __func__);
 
-    /*
-    //On a specific block, a recalculation of the accumulators will be forced
-    if (nHeight == Params().Zerocoin_Block_RecalculateAccumulators()) {
-        mapAccumulators.Reset();
-        if (!mapAccumulators.Load(chainActive[Params().Zerocoin_Block_LastGoodCheckpoint()]->nAccumulatorCheckpoint))
-            return error("%s: failed to reset to previous checkpoint when recalculating accumulators", __func__);
-
-        // Erase the checkpoints from the period of time that bad mints were being made
-        if (!EraseCheckpoints(Params().Zerocoin_Block_LastGoodCheckpoint() + 1, nHeight))
-            return error("%s : failed to erase Checkpoints while recalculating checkpoints", __func__);
-
-        nHeightCheckpoint = Params().Zerocoin_Block_LastGoodCheckpoint();
-        return true;
-    }
-
-    if (nHeight >= Params().Zerocoin_StartHeight()) {
-        //after v2_start, accumulators need to use v2 params
-        mapAccumulators.Reset(Params().Zerocoin_Params(false));
-
-        // 20 after v2 start is when the new checkpoints will be in the block, so don't need to load hard checkpoints
-        if (nHeight <= Params().Zerocoin_StartHeight() + 20) {
-            //Load hard coded checkpointed value
-            AccumulatorCheckpoints::Checkpoint checkpoint = AccumulatorCheckpoints::GetClosestCheckpoint(nHeight,
-                                                                                                         nHeightCheckpoint);
-            if (nHeightCheckpoint < 0)
-                return error("%s: failed to load hard-checkpoint for block %s", __func__, nHeight);
-
-            mapAccumulators.Load(checkpoint);
-            return true;
-        }
-    }*/
-
     //Use the previous block's checkpoint to initialize the accumulator's state
     uint256 nCheckpointPrev = chainActive[nHeight - 1]->nAccumulatorCheckpoint;
     if (nCheckpointPrev == 0)
@@ -299,7 +267,7 @@ bool CalculateAccumulatorCheckpoint(int nHeight, uint256& nCheckpoint, Accumulat
 
 bool InvalidCheckpointRange(int nHeight)
 {
-    return nHeight > Params().Zerocoin_Block_LastGoodCheckpoint() && nHeight < Params().Zerocoin_Block_RecalculateAccumulators();
+    return false;
 }
 
 bool ValidateAccumulatorCheckpoint(const CBlock& block, CBlockIndex* pindex, AccumulatorMap& mapAccumulators)

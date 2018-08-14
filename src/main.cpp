@@ -2541,7 +2541,7 @@ bool ReindexAccumulators(list<uint256>& listMissingCheckpoints, string& strError
 bool UpdateZMOKSupply(const CBlock& block, CBlockIndex* pindex)
 {
     std::list<CZerocoinMint> listMints;
-    bool fFilterInvalid = pindex->nHeight >= Params().Zerocoin_Block_RecalculateAccumulators();
+    bool fFilterInvalid = false;
     BlockToZerocoinMintList(block, listMints, fFilterInvalid);
     std::list<libzerocoin::CoinDenomination> listSpends = ZerocoinSpendListFromBlock(block, fFilterInvalid);
 
@@ -2790,13 +2790,6 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
 
         vPos.push_back(std::make_pair(tx.GetHash(), pos));
         pos.nTxOffset += ::GetSerializeSize(tx, SER_DISK, CLIENT_VERSION);
-    }
-
-    //A one-time event where money supply counts were off and recalculated on a certain block.
-    if (pindex->nHeight == Params().Zerocoin_Block_RecalculateAccumulators() + 1) {
-        RecalculateZMOKMinted();
-        RecalculateZMOKSpent();
-        RecalculateMOKSupply(Params().Zerocoin_StartHeight());
     }
 
     //Track zMOK money supply in the block index
