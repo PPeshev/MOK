@@ -81,7 +81,7 @@ bool fVerifyingBlocks = false;
 unsigned int nCoinCacheSize = 5000;
 bool fAlerts = DEFAULT_ALERTS;
 
-unsigned int nStakeMinAge = 60 * 6;//(60 * 60)
+unsigned int nStakeMinAge = 60 * 60;
 int64_t nReserveBalance = 0;
 
 /** Fees smaller than this (in umok) are considered zero fee (for relaying and mining)
