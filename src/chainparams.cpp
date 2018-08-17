@@ -129,7 +129,7 @@ public:
         pchMessageStart[3] = 0xe7;
          vAlertPubKey = ParseHex("04803DD31933D4274ED7C9A9E1F3E246283FC6A148F3A331417F6837183083CB805E413FA92D5391742869B2B970201C138C3BF3A5BBF4DEC2735A8A1537A3BDE7");
         nDefaultPort = 10137;
-        bnProofOfWorkLimit = ~uint256(0) >> 20; // Moken starting difficulty is 1 / 2^12
+        bnProofOfWorkLimit = ~uint256(0) >> 20; //Moken starting difficulty is 1 / 2^12
         nSubsidyHalvingInterval = 210000;
         nMaxReorganizationDepth = 100;
         nEnforceBlockUpgradeMajority = 750;
@@ -144,8 +144,8 @@ public:
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 1000;
-        nZerocoinStartHeight = 1500;
-        nZerocoinStartTime = 1534345027;
+        nZerocoinStartHeight = 1600;
+        nZerocoinStartTime = 1534593341;
         nBlockLastGoodCheckpoint = -1; //Last valid accumulator checkpoint
         
         /**
