@@ -4575,7 +4575,7 @@ bool CWallet::MintToTxIn(CZerocoinMint zerocoinSelected, int nSecurityLevel, con
     receipt.SetStatus(_("Transaction Mint Started"), ZMOK_TXMINT_GENERAL);
     libzerocoin::ZerocoinParams* paramsAccumulator = Params().Zerocoin_Params(false);
 
-    bool isV1Coin = libzerocoin::ExtractVersionFromSerial(zerocoinSelected.GetSerialNumber()) < libzerocoin::PrivateCoin::PUBKEY_VERSION;
+    bool isV1Coin = false;//libzerocoin::ExtractVersionFromSerial(zerocoinSelected.GetSerialNumber()) < libzerocoin::PrivateCoin::PUBKEY_VERSION;
     libzerocoin::ZerocoinParams* paramsCoin = Params().Zerocoin_Params(isV1Coin);
     //LogPrintf("%s: *** using v1 coin params=%b, using v1 acc params=%b\n", __func__, isV1Coin, chainActive.Height() < Params().Zerocoin_Block_V2_Start());
 
@@ -4623,6 +4623,7 @@ bool CWallet::MintToTxIn(CZerocoinMint zerocoinSelected, int nSecurityLevel, con
         return error("%s: could not find checksum used for spend\n", __func__);
 
     try {
+        LogPrintf("Trace 0\n");
         libzerocoin::CoinSpend spend(paramsCoin, paramsAccumulator, privateCoin, accumulator, nChecksum, witness, hashTxOut,
                                      spendType);
         LogPrintf("%s\n", spend.ToString());
@@ -4638,20 +4639,26 @@ bool CWallet::MintToTxIn(CZerocoinMint zerocoinSelected, int nSecurityLevel, con
             return false;
         }
 
+        LogPrintf("Trace 1\n");
         // Deserialize the CoinSpend intro a fresh object
         CDataStream serializedCoinSpend(SER_NETWORK, PROTOCOL_VERSION);
         serializedCoinSpend << spend;
         std::vector<unsigned char> data(serializedCoinSpend.begin(), serializedCoinSpend.end());
+
+        LogPrintf("Trace 2\n");
 
         //Add the coin spend into a MOKEN transaction
         newTxIn.scriptSig = CScript() << OP_ZEROCOINSPEND << data.size();
         newTxIn.scriptSig.insert(newTxIn.scriptSig.end(), data.begin(), data.end());
         newTxIn.prevout.SetNull();
 
+        LogPrintf("Trace 3\n");
+
         //use nSequence as a shorthand lookup of denomination
         //NOTE that this should never be used in place of checking the value in the final blockchain acceptance/verification
         //of the transaction
         newTxIn.nSequence = denomination;
+        LogPrintf("Trace 4\n");
 
         CDataStream serializedCoinSpendChecking(SER_NETWORK, PROTOCOL_VERSION);
         try {
@@ -4661,11 +4668,15 @@ bool CWallet::MintToTxIn(CZerocoinMint zerocoinSelected, int nSecurityLevel, con
             return false;
         }
 
+        LogPrintf("Trace 5\n");
+
         libzerocoin::CoinSpend newSpendChecking(paramsCoin, paramsAccumulator, serializedCoinSpendChecking);
         if (!newSpendChecking.Verify(accumulator)) {
             receipt.SetStatus(_("The transaction did not verify"), ZMOK_BAD_SERIALIZATION);
             return false;
         }
+
+        LogPrintf("Trace 6\n");
 
         if (IsSerialKnown(spend.getCoinSerialNumber())) {
             //Tried to spend an already spent zMOK
@@ -4684,11 +4695,15 @@ bool CWallet::MintToTxIn(CZerocoinMint zerocoinSelected, int nSecurityLevel, con
             return false;
         }
 
+        LogPrintf("Trace 7\n");
+
         uint32_t nAccumulatorChecksum = GetChecksum(accumulator.getValue());
         CZerocoinSpend zcSpend(spend.getCoinSerialNumber(), 0, zerocoinSelected.GetValue(), zerocoinSelected.GetDenomination(), nAccumulatorChecksum);
         zcSpend.SetMintCount(nMintsAdded);
         receipt.AddSpend(zcSpend);
-    } catch (const std::exception&) {
+    } catch (const std::exception& ex) {
+    
+        LogPrintf("%s: failed to write zerocoinmint\n", ex.what());
         receipt.SetStatus(_("CoinSpend: Accumulator witness does not verify"), ZMOK_INVALID_WITNESS);
         return false;
     }
