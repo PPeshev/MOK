@@ -38,7 +38,7 @@ namespace libzerocoin
         //std::cout << "CoinSpend: Accumulator witness does not verify\n";
         throw std::runtime_error("Accumulator witness does not verify");
     }
-        LogPrintf("has valid witness\n");
+
     // 1: Generate two separate commitments to the public coin (C), each under
     // a different set of public parameters. We do this because the RSA accumulator
     // has specific requirements for the commitment parameters that are not
@@ -48,29 +48,28 @@ namespace libzerocoin
     // group with a significantly larger order.
     const Commitment fullCommitmentToCoinUnderSerialParams(&paramsCoin->serialNumberSoKCommitmentGroup, coin.getPublicCoin().getValue());
     this->serialCommitmentToCoinValue = fullCommitmentToCoinUnderSerialParams.getCommitmentValue();
-        LogPrintf("Trace +-\n");
+
     const Commitment fullCommitmentToCoinUnderAccParams(&paramsAcc->accumulatorParams.accumulatorPoKCommitmentGroup, coin.getPublicCoin().getValue());
     this->accCommitmentToCoinValue = fullCommitmentToCoinUnderAccParams.getCommitmentValue();
-        LogPrintf("Trace -1\n");
+
     // 2. Generate a ZK proof that the two commitments contain the same public coin.
     this->commitmentPoK = CommitmentProofOfKnowledge(&paramsCoin->serialNumberSoKCommitmentGroup, &paramsAcc->accumulatorParams.accumulatorPoKCommitmentGroup, fullCommitmentToCoinUnderSerialParams, fullCommitmentToCoinUnderAccParams);
-        LogPrintf("Trace -2\n");
+
     // Now generate the two core ZK proofs:
     // 3. Proves that the committed public coin is in the Accumulator (PoK of "witness")
     this->accumulatorPoK = AccumulatorProofOfKnowledge(&paramsAcc->accumulatorParams, fullCommitmentToCoinUnderAccParams, witness, a);
-        LogPrintf("Trace -3\n");
+
     // 4. Proves that the coin is correct w.r.t. serial number and hidden coin secret
     // (This proof is bound to the coin 'metadata', i.e., transaction hash)
     uint256 hashSig = signatureHash();
     this->serialNumberSoK = SerialNumberSignatureOfKnowledge(paramsCoin, coin, fullCommitmentToCoinUnderSerialParams, hashSig);
-        LogPrintf("Trace -4\n");
+
     // 5. Sign the transaction using the private key associated with the serial number
     if (version >= PrivateCoin::PUBKEY_VERSION) {
         this->pubkey = coin.getPubKey();
         if (!coin.sign(hashSig, this->vchSig))
             throw std::runtime_error("Coinspend failed to sign signature hash");
     }
-            LogPrintf("Trace -5\n");
 }
 
 bool CoinSpend::Verify(const Accumulator& a) const
