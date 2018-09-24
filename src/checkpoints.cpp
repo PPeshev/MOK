@@ -1,3 +1,4 @@
+
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
 // Copyright (c) 2016-2018 The PIVX developers
@@ -26,7 +27,7 @@ namespace Checkpoints
      */
 static const double SIGCHECK_VERIFICATION_FACTOR = 5.0;
 
-bool fEnabled = false;
+bool fEnabled = true;
 
 bool CheckBlock(int nHeight, const uint256& hash, bool fMatchesCheckpoint)
 {
