@@ -58,7 +58,7 @@ static Checkpoints::MapCheckpoints mapCheckpoints =
     (10, uint256("000003b80820aa550fc71f39c1a9137dc5c67e27e723ffc2440e31f2c2c9604e"))
     (1000, uint256("0000006015b938cdff5fbcc6d226051456a3f35215b0462fe14a00c900d269a8"))//last POW block 
     (1001, uint256("8a910c42600d7b629afa7adb5401aca2e6bb2afaa2db1a55897a99ab8c6491a3"))//first POS block
-    (1602, uint256("e322b32b85933b03e2c471a53700d89672b572a0335b24df2485b38486048ccb"))//first block to use modifierV2
+    (1602, uint256("34bb712a81e350f633b4a8ebb3a26c055d1fa3e5ef47930bc0dd26ef8a610a99"))//first block to use modifierV2
     (2000, uint256("4e0a76e5c1227752d251fe3e9a641f65d9ffd28dc2dd2ea2752a9f31a3acd557"));
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
